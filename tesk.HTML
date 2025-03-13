@@ -1,0 +1,16 @@
+<form id="generatorForm">
+  <input type="text" placeholder="输入文字">
+  <input type="file" accept="image/*">
+  <button type="submit">生成HTML</button>
+</form>
+<div id="output"></div>
+
+<script>
+  document.getElementById('generatorForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const response = await fetch('/generate-html', { method: 'POST', body: formData });
+    const html = await response.text();
+    document.getElementById('output').innerHTML = html;
+  });
+</script>
